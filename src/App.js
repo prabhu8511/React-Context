@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, Fragment } from 'react'
+
+import FunctionContextComponent from './FunctionContextComponent'
+
+import ClassContextComponent from './ClassContextComponet'
+
+
+export const ThemeContext = React.createContext()
 
 function App() {
+  const [darkTheme, setDarkTheme] = useState(false)
+
+  function toggleTheme() {
+    setDarkTheme(prevDarkTheme => !prevDarkTheme)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+
+      <ThemeContext.Provider value={darkTheme}>
+
+         <FunctionContextComponent />
+
+         <ClassContextComponent />
+
+      </ThemeContext.Provider>
+      </>
   );
 }
 
